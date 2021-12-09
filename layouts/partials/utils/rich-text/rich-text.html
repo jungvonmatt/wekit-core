@@ -1,0 +1,17 @@
+{{ $globals := .globals }}
+
+{{- range .context -}}
+  {{- $partial := print "utils/rich-text/blocks/" .node_type ".html" -}}
+  {{- if in (apply (seq 6) "printf" "heading-%v" ".") .node_type }}
+    {{- $partial = print "utils/rich-text/blocks/heading.html" -}}
+  {{ end -}}
+  {{- $partial_check := print "layouts/partials/" $partial -}}
+  {{- if $partial_check -}}
+    {{- partial $partial (dict
+      "context" .
+      "globals" $globals
+    ) -}}
+  {{- else -}}
+    {{- partial "utils/not-found.html" (dict "name" $partial_check) -}}
+  {{ end -}}
+{{- end -}}

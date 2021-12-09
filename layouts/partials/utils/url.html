@@ -1,0 +1,27 @@
+{{- $globals := .globals -}}
+{{- $linkEntry := .context.linkEntry -}}
+{{- $linkAsset := .context.linkAsset -}}
+{{- $linkUrl := .context.linkUrl -}}
+{{- /* TODO: Implement anchor link */ -}}
+
+{{- if $linkEntry -}}
+  {{- $page := $globals.Site.GetPage $linkEntry.id -}}
+
+  {{- with $page -}}
+    {{- $linkEntry = .RelPermalink -}}
+  {{- else -}}
+    {{/* Link to home if no page exist */}}
+    {{- $linkEntry = "/" -}}
+  {{- end -}}
+
+  {{- /* Output entry url */ -}}
+  {{- $linkEntry | safeURL -}}
+{{- else if $linkAsset -}}
+
+{{- /* Output asset url */ -}}
+  {{- $linkAsset.url | safeURL -}}
+{{- else if $linkUrl -}}
+
+  {{- /* Output plain url */ -}}
+  {{- $linkUrl | safeURL -}}
+{{- end -}}
