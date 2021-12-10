@@ -165,7 +165,23 @@ Get Contentful settings (`d-settings`).
 
 ### html/attribute
 
-> TODO
+Render HTML attributes.
+
+*Template*
+
+```
+{{ $attr := partialCached "utils/html/attribute" (dict
+  "key" "value"
+  "data" (dict "index" 2)
+  "disabled" true
+) }}
+```
+
+*Output*
+
+```
+key="value" data-index="2" disabled
+```
 
 ### link
 
@@ -196,6 +212,7 @@ Render a not-found warning.
 A rich text field in Contentful consists of nested arrays. The util loops over each node and generates the corresponding HTML depending on the nodeType. See `utils/rich-text/blocks` for supported types.
 
 ## Layouts
+
 ### storybook
 
 A set of layouts that support the generation of Storybook files.
