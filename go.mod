@@ -1,3 +1,3 @@
-module github.com/jungvonmatt/karate-kit/core
+module github.com/jungvonmatt/contentful-hugo-core
 
 go 1.17

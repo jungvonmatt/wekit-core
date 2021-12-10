@@ -4,3 +4,7 @@ min = "0.89.4"
 [[module.mounts]]
 source = "layouts"
 target = "layouts"
+
+[[module.mounts]]
+source = "utils"
+target = "layouts/partials/utils"

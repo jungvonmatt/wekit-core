@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="{{ .Site.LanguageCode | default "en" }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    {{/* TBD: Not relevant if assets are delivered locally */}}
+    <link rel="preconnect" href="https://images.ctfassets.net">
+    {{ partial "structure/styles.html" (dict
+      "context" .
+      "globals" $
+    ) }}
+    {{ with .Params.seo }}
+      {{ with partial "utils/get-params" . }}
+        <title>{{ .title }}</title>
+        <meta name="description" content="{{ .description }}">
+        {{ if eq $.Kind "404" -}}
+          <meta name="robots" content="noindex, follow">
+        {{ else -}}
+          {{ $index := cond (eq .no_index true) "noindex" "index" }}
+          {{ $follow := cond (eq .no_follow true) "nofollow" "follow" }}
+          <meta name="robots" content="{{ $index }}, {{ $follow }}">
+          {{ if (and (eq $index "index") (eq $follow "follow")) }}
+            <!-- TBD: https://developers.google.com/search/docs/advanced/robots/robots_meta_tag -->
+            <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+            <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+          {{ end -}}
+        {{ end -}}
+      {{ end }}
+    {{ end }}
+    <link rel="canonical" href="{{ .Permalink | absURL }}">
+    {{ if .AllTranslations }}
+      <link rel="alternate" hreflang="x-default" href="{{ (index .AllTranslations 0).Permalink }}">
+    {{ end }}
+    {{ if .IsTranslated -}}
+      {{ range .AllTranslations -}}
+        {{ if ne .Permalink $.Page.Permalink -}}
+          <link rel="alternate" hreflang="{{ .Language.Lang }}" href="{{ .Permalink | absURL }}">
+        {{ end -}}
+      {{ end -}}
+    {{ end -}}
+    {{ range .AlternativeOutputFormats -}}
+      <link rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .Permalink | safeURL }}">
+    {{ end -}}
+    <meta name="theme-color" content="{{ $.Site.Params.theme_color }}">
+    <link rel="manifest" href="{{ "site.webmanifest" | absURL }}" crossorigin="use-credentials">
+    <!-- TBD: Do we need absolute URLs? -->
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ "favicon-32x32.png" | absURL }}">
+    <link rel="icon" type="image/svg+xml" href="{{ "favicon.svg" | absURL }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ "apple-touch-icon.png" | absURL }}">
+  </head>
+  <body>
+    {{ block "header" . }}{{ end }}
+    {{/* {{ partial "modules/m-header.html" (dict "context" . "globals" $) }} */}}
+    <main>
+      {{ block "main" . }}{{ end }}
+    </main>
+    {{ block "footer" . }}{{ end }}
+    {{/* {{ partial "modules/m-footer.html" (dict "context" . "globals" $ ) }} */}}
+    {{/* {{ partial "structure/icons.html" (dict "context" .  "globals" $ ) }} */}}
+  </body>
+</html>
