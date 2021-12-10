@@ -1,8 +1,0 @@
-{{ define "main" }}
-  {{ with .Params.content }}
-    {{ partial "utils/get-partial.html" (dict
-      "context" .
-      "globals" $
-    ) }}
-  {{ end }}
-{{ end }}
