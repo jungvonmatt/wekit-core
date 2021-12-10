@@ -205,7 +205,15 @@ Render a not-found warning.
 
 ### reflect/is-string
 
-> TODO
+Check if passed value is of type "string".
+
+*Template*
+
+```
+{{ if partialCached "reflect/is-string" $value $value }}
+  We have a string!
+{{ end }}
+```
 
 ### rich-text/rich-text
 
