@@ -1,23 +1,21 @@
-{{/* utils/asset/image
+{{/*
+  utils/asset/image
 
   Render Contentful asset (image/...).
   Uses data from cssg-plugin-assets if available.
 
   @example - Go Template
-
-  {{ partial "utils/asset/image" (dict
-    "context" $image
-    "options" (dict
-      "sizes" "(max-width: 768px) 100vw, 768px"
-      "alt" "Alt text"
-      "class_name" "c-image"
-      "decoding" "auto"
-      "lazy" true
-    )
-  ) }}
-
+    {{ partial "utils/asset/image" (dict
+      "context" $image
+      "options" (dict
+        "sizes" "(max-width: 768px) 100vw, 768px"
+        "alt" "Alt text"
+        "class_name" "c-image"
+        "decoding" "auto"
+        "lazy" true
+      )
+    ) }}
 */}}
-
 {{- $context := .context | default dict -}}
 {{- $options := .options | default dict -}}
 {{- $params := (merge $context $options) -}}

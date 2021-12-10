@@ -1,11 +1,10 @@
-{{/* utils/dump
+{{/*
+  utils/dump
 
-  Dump variable as highlighted yaml
+  Dump variable as highlighted yaml.
 
   @example - Go Template
-
-  {{ partial "utils/dump" .context }}
-
+    {{ partial "utils/dump" .context }}
 */}}
 {{ with $ }}
   {{ $yaml := .| jsonify | transform.Remarshal "yaml" }}

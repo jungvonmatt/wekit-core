@@ -1,19 +1,19 @@
-{{/* WriteAttribute
+{{/*
+  utils/html/attribute
 
   @context Map
-  String (.key)
-  Any (.value)
+    String (.key)
+    Any (.value)
 
   @example - Go Template
-  {{ $attr := partialCached "utils/html/attribute" (dict
-    "key" "value"
-    "data" (dict "index" 2)
-    "disabled" true
-  ) }}
+    {{ $attr := partialCached "utils/html/attribute" (dict
+      "key" "value"
+      "data" (dict "index" 2)
+      "disabled" true
+    ) }}
 
    key="value" data-index="2" disabled
 */}}
-
 {{ $result := slice }}
 {{ range $key, $value := . }}
   {{ with $value }}

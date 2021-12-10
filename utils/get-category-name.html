@@ -1,12 +1,11 @@
-{{/* utils/get-category-name
+{{/*
+  utils/get-category-name
 
-  Get category name by prefix of content_type
+  Get category name by prefix of content_type.
 
   @example - Go Template
-
-  {{ partial "utils/get-category-name" (dict "content_type" $content_type) }}
+    {{ partial "utils/get-category-name" (dict "content_type" $content_type) }}
 */}}
-
 {{- $content_type := .content_type -}}
 
 {{- $result := "" -}}

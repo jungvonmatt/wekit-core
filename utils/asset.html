@@ -1,20 +1,18 @@
-{{/* utils/asset
+{{/*
+  utils/asset
 
   Render Contentful asset.
   Uses data from cssg-plugin-assets if available.
 
   @example - Go Template
-
-  {{ partial "utils/asset" (dict
-    "globals" $globals
-    "context" $image
-    "options" (dict
-      "sizes" "(max-width: 768px) 100vw, 768px"
-    )
-  ) }}
-
+    {{ partial "utils/asset" (dict
+      "globals" $globals
+      "context" $image
+      "options" (dict
+        "sizes" "(max-width: 768px) 100vw, 768px"
+      )
+    ) }}
 */}}
-
 {{- $globals := .globals -}}
 {{- $context := .context | default dict -}}
 {{- $options := .options | default dict -}}
