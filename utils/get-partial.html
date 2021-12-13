@@ -1,6 +1,6 @@
-{{/* utils/get-page
-
-  Calls partial connected with linked content type with .Params from from linked page
+{{/*
+  utils/get-page
+  Calls partial connected with linked content type with .Params from from linked page.
 
   @uses
     - utils/get-params
@@ -9,13 +9,11 @@
     - layouts/partials/...
 
   @example - Go Template
-
-  {{ partial "utils/get-partial" (dict
-    "globals" $globals
-    "context" (dict "id" "ENTRY_ID" "content_type" "CONTENT_TYPE_ID")
-    "options" (dict "key" "param overwrite")
-  ) }}
-
+    {{ partial "utils/get-partial" (dict
+      "globals" $globals
+      "context" (dict "id" "ENTRY_ID" "content_type" "CONTENT_TYPE_ID")
+      "options" (dict "key" "param overwrite")
+    ) }}
 */}}
 {{- $globals := .globals -}}
 {{- $context := .context -}}

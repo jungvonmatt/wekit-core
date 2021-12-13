@@ -1,14 +1,12 @@
-{{/* utils/get-page
-
-  Get linked page document for content-type + id
+{{/*
+  utils/get-page
+  Get linked page for content_type and id.
 
   @example - Go Template
-
-  {{ partial "utils/get-page" (dict
-    "id" "ENTRY_ID"
-    "content_type" "CONTENT_TYPE_ID"
-  ) }}
-
+    {{ partial "utils/get-page" (dict
+      "id" "ENTRY_ID"
+      "content_type" "CONTENT_TYPE_ID"
+    ) }}
 */}}
 {{ $entry_id := .id }}
 {{ $content_type := .content_type }}

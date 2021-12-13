@@ -1,11 +1,9 @@
-{{/* utils/not-found
-
-  Render not-found warning
+{{/*
+  utils/not-found
+  Render not-found warning.
 
   @example - Go Template
-
-  {{ partial "utils/not-found" (dict "name" $file_path) }}
-
+    {{ partial "utils/not-found" (dict "name" $file_path) }}
 */}}
 {{ if .inline }}
   <span style="background: red; color: white;">

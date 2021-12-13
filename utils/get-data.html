@@ -1,16 +1,17 @@
-{{/* utils/get-data
-
-  Get data from contentful data types
+{{/*
+  utils/get-data
+  Get data from contentful data types.
 
   @example - Go Template
-
-  {{ partial "utils/get-data" (dict
-    "globals" $globals
-    "context" (dict "id" "ENTRY_ID" "content_type" "CONTENT_TYPE_ID")
-  ) }}
-
+    {{ partial "utils/get-data" (dict
+      "globals" $globals
+      "context" (dict
+        "id" "ENTRY_ID"
+        "content_type"
+        "CONTENT_TYPE_ID"
+      )
+    ) }}
 */}}
-
 {{ $entry_id := .id }}
 {{ $content_type := .content_type }}
 {{ $result := dict }}

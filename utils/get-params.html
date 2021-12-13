@@ -1,17 +1,15 @@
-{{/* utils/get-page
-
-  Get params from linked page
+{{/*
+  utils/get-page
+  Get params from linked page.
 
   @uses
     - utils/get-page
 
   @example - Go Template
-
-  {{ partial "utils/get-params" (dict
-    "id" "ENTRY_ID"
-    "content_type" "CONTENT_TYPE_ID"
-  ) }}
-
+    {{ partial "utils/get-params" (dict
+      "id" "ENTRY_ID"
+      "content_type" "CONTENT_TYPE_ID"
+    ) }}
 */}}
 {{ $content_type := .content_type }}
 {{ $params := dict }}
