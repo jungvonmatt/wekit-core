@@ -33,9 +33,7 @@
 {{ $image_attributes := partialCached "utils/html/attribute" (dict
   "loading" $loading
   "decoding" $decoding
-  "alt" $alt
 ) $params }}
-
 {{- if in $mime_type "image" -}}
   {{- with $derivatives -}}
     {{- $data := (index $derivatives "original") -}}
@@ -52,13 +50,13 @@
         {{- range $srcsets -}}
           <source sizes="{{ $local_sizes }}" srcset="{{- .srcset -}}" type="{{ .type }}">
         {{- end -}}
-        <img src="{{ $src }}" width="{{ $width }}" height="{{ $height }}" {{ $image_attributes }}>
+        <img src="{{ $src }}" width="{{ $width }}" height="{{ $height }}" {{ $image_attributes }} alt="{{ $alt }}">
       </picture>
     {{- end -}}
   {{- else -}}
     {{- with $url -}}
       {{ $src := cond (hasPrefix . "//") (print "https:" .) . }}
-      <img src="{{ $src }}" width="{{ $width }}" height="{{ $height }}" {{ $image_attributes }}>
+      <img src="{{ $src }}" width="{{ $width }}" height="{{ $height }}" {{ $image_attributes }} alt="{{ $alt }}">
     {{- end -}}
   {{- end -}}
 {{- end -}}

@@ -4,7 +4,7 @@
   @author @regisphilibert
 
   @context Map
-    String (.element)
+    String (.name)
     String (.inner)
     Map (.attr)
 
@@ -16,7 +16,7 @@
     - private/WriteAttribute
 
   @example - Go Template
-  {{- with partialCached "tnd-tags/private/WriteTag" . . -}}
+  {{- with partialCached "utils/html/tag" . . -}}
   {{- . | safeHTML -}}
   {{- end -}}
 */}}
