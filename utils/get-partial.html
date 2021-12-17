@@ -19,6 +19,7 @@
 {{- $context := .context -}}
 {{- $entry_id := $context.id -}}
 {{- $content_type := $context.content_type -}}
+{{- $mime_type := $context.mime_type -}}
 {{- $options := .options | default dict -}}
 
 {{- if $content_type -}}
@@ -38,4 +39,10 @@
   {{- else -}}
     {{- partial "utils/not-found" (dict "name" $file_path) -}}
   {{- end -}}
+{{- else if ($mime_type) -}}
+  {{- partial "utils/asset" (dict
+      "globals" $globals
+      "context" $context
+      "options" $options
+    ) -}}
 {{- end -}}

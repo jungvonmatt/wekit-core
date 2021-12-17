@@ -42,7 +42,7 @@
       {{ end }}
     {{ end }}
 
-    {{/* Page content type */}}
+  {{/* Page content type */}}
   {{ else if eq .content_type "page" }}
     {{ with partialCached "utils/get-page" . . }}
       {{ $return = (dict
