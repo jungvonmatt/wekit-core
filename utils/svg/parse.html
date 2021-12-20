@@ -107,13 +107,13 @@
   {{ $symbol = replaceRE (print "</" $tag ".*?>") "</symbol>" $symbol }}
   {{ $symbol = replaceRE "(\\n(\\p{Z}+)?)+" "" $symbol }}
   {{ $svg = replaceRE (print "<" $tag ".*?>") (printf "<svg class=\"%s\" width=\"%.f\" height=\"%.f\" viewBox=\"%s\"  xmlns=\"http://www.w3.org/2000/svg\">" $class (float (or $dest_width $width)) (float (or  $dest_height $height)) $viewbox) . }}
-  {{ $svg = replaceRE "(\\n(\\p{Z}+)?)+" "" $svg }}
   {{ $svg = replaceRE (print "</" $tag ".*?>") "</svg>" $svg }}
   {{ $svg = replaceRE "(\\n(\\p{Z}+)?)+" "" $svg }}
 {{ end }}
 
 {{ $result := (dict
   "id" $id
+  "source" $source
   "size" $size
   "width" (float $width)
   "height" (float $height)
