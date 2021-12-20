@@ -1,5 +1,5 @@
 [module.hugoVersion]
-min = "0.89.4"
+min = "0.91.0"
 
 [[module.mounts]]
 source = "layouts"
