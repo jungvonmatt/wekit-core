@@ -19,7 +19,10 @@ export const {{ replace (.File.ContentBaseName | title) "-" "" }} = () => `
 {{- partial "utils/get-partial" (dict
   "context" .
   "globals" $
-) -}}
+) -}}{{ with partial "utils/svg/sprite" $ }}
+
+  {{ . }}
+{{ end }}
 {{- end -}}
 `;
 {{- end -}}

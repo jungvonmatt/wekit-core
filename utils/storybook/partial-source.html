@@ -12,8 +12,8 @@
 
 {{ if and $content_type }}
   {{ $category := partial "utils/get-category-name" (dict "content_type" $content_type) }}
-  {{ $file_path := print $category "/" $content_type ".html" }}
-  {{- if templates.Exists (printf "partials/%s" $file_path) -}}
+  {{ $file_path := print $category "/" $content_type }}
+  {{- if templates.Exists (printf "partials/%s.html" $file_path) -}}
     {{ with partial "utils/get-params" $context }}
       {{ $params := partial "utils/storybook/dump" (dict "context" .) }}
       {{ $options :=  partial "utils/storybook/dump" (dict "context" $options) }}
