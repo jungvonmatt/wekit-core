@@ -1,7 +1,6 @@
 {{/*
   utils/asset/image
   Render Contentful asset (image/svg+xml). Uses data from cssg-plugin-assets if available.
-  Could be extended in the future to allow adding svg icons via scratch to a svg sprite
 
   @example - Go Template
     {{ partial "utils/asset/svg" (dict
@@ -23,11 +22,9 @@
 {{- $source := $params.source -}}
 
 {{- if (and (in $mime_type "svg") $inline $source) -}}
-  <div {{- with $class_name }} class="{{ . }}"{{ end -}}>
-    {{$source | safeHTML}}
-  </div>
+  {{ partial "utils/svg/icon" . }}
 {{- else -}}
-  {{ partialCached "utils/asset/image" (dict
+  {{ partial "utils/asset/image" (dict
     "globals" $globals
     "context" $context
     "options" $options
