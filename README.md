@@ -5,6 +5,8 @@
 - [contentful-hugo-core](#contentful-hugo-core)
   - [Utils](#utils)
     - [asset](#asset)
+    - [svg/icon](#svgicon)
+    - [svg/sprite](#svgsprite)
     - [console/dump](#consoledump)
     - [console/error](#consoleerror)
     - [console/warn](#consolewarn)
@@ -15,7 +17,10 @@
     - [get-params](#get-params)
     - [get-partial](#get-partial)
     - [get-settings](#get-settings)
+    - [html/tag](#htmltag)
     - [html/attribute](#htmlattribute)
+    - [seo/tags](#seotags)
+    - [seo/data](#seodata)
     - [link](#link)
     - [not-found](#not-found)
     - [reflect/is-string](#reflectis-string)
@@ -30,7 +35,7 @@
 ### asset
 
 Render Contentful asset. Uses data from [cssg-plugin-assets](https://github.com/jungvonmatt/contentful-ssg/tree/main/packages/cssg-plugin-assets) if available.
-
+Uses `svg/icon` when the inline options is set and we got an svg, 
 *Template*
 
 ```
@@ -41,6 +46,37 @@ Render Contentful asset. Uses data from [cssg-plugin-assets](https://github.com/
     "sizes" "(max-width: 768px) 100vw, 768px"
   )
 ) }}
+```
+
+### svg/icon
+
+Render svg icon from local file or contentful asset
+
+*Template*
+
+```
+{{ partial "utils/svg/icon" (dict
+  "globals" $globals
+  "context" $svg (contentful asset or path relative to assets)
+  "options" (dict
+    "inline" true
+    "sprite" false
+    "class_name" "c-icon"
+    "width" 16
+    "height" 16
+  )
+) }}
+```
+
+
+### svg/sprite
+
+Render svg icon sprite with all icons rendered by utils/svg/icon using "sprite" true
+
+*Template*
+
+```
+{{ partial "utils/svg/sprite" $ }}
 ```
 
 ### console/dump
@@ -163,6 +199,24 @@ Get Contentful settings (`d-settings`).
 {{ partial "utils/get-settings" }}
 ```
 
+### html/tag
+
+Render HTML tag.
+
+*Template*
+
+```
+{{- with partial "utils/html/tag" (dict "name" "a" "inner" "Link Text" "attr" (dict "href" "..." )) -}}
+  {{- . | safeHTML -}}
+{{- end -}}
+```
+
+*Output*
+
+```
+<a href="...">Link Text</a>
+```
+
 ### html/attribute
 
 Render HTML attributes.
@@ -182,6 +236,50 @@ Render HTML attributes.
 ```
 key="value" data-index="2" disabled
 ```
+
+### seo/tags
+
+Render SEO attributes used in HEAD. (title,description,canonical,hreflang,twitter:...,og:...,jsonld,robots
+
+*Template*
+
+```
+{{ partial "utils/seo/tags" $ }}
+```
+
+*Output*
+
+```
+<title>Karate Kit</title>
+<meta content="Karate Kit" property="og:title">
+<meta content="Karate Kit" name="twitter:title">
+<meta content="Home" name="description">
+<meta content="Home" property="og:description">
+<meta content="Home" name="twitter:description">
+<meta content="https://deploy-preview-278--karate-kit-dojo.netlify.app/en/" property="og:url">
+<meta content="https://deploy-preview-278--karate-kit-dojo.netlify.app/en/" name="twitter:url">
+<meta content="Karate Kit" property="og:site_name">
+<meta content="en" property="og:locale">
+<link href="https://deploy-preview-278--karate-kit-dojo.netlify.app/de/" hreflang="de" rel="alternate">
+<meta content="de" property="og:locale:alternate">
+<meta content="website" property="og:type">
+<meta content="2021-05-19T20:18:57+00:00" property="og:published_time">
+<meta content="2021-08-13T12:50:12+00:00" property="og:updated_time">
+<meta content="summary" name="twitter:card">
+<meta content="https://deploy-preview-278--karate-kit-dojo.netlify.app/en/" name="canonical">
+<meta content="index, follow" name="robots">
+<meta content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" name="googlebot">
+<meta content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" name="bingbot">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"website","dateModified":"2021-08-13T12:50:12+00:00","datePublished":"2021-05-19T20:18:57+00:00","description":"Home","headline":"Karate Kit","image":null,"url":"https://deploy-preview-278--karate-kit-dojo.netlify.app/en/"}</script>
+```
+
+### seo/data
+
+Add/Edit SEO Scratch Object
+
+The user does not load the partial, as the component will.
+This allows to overwrite some SEO Data with project's own.
+Project's partial should live under `layouts/partials/utils/seo/data.html`
 
 ### link
 
