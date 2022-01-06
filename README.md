@@ -2,7 +2,7 @@
 
 [Hugo](https://gohugo.io/) templates and utilities that support [Contentful](https://www.contentful.com/) and/or [Storybook](https://storybook.js.org/) projects.
 
-- [contentful-hugo-core](#contentful-hugo-core)
+- [wekit-core](#wekit-core)
   - [Utils](#utils)
     - [asset](#asset)
     - [svg/icon](#svgicon)
