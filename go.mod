@@ -1,3 +1,3 @@
-module github.com/jungvonmatt/contentful-hugo-core
+module github.com/jungvonmatt/wekit-core
 
 go 1.17
