@@ -56,7 +56,7 @@
   {{- else -}}
     {{- with $url -}}
       {{ $src := cond (hasPrefix . "//") (print "https:" .) . }}
-      <img src="{{ $src }}" width="{{ $width }}" height="{{ $height }}" {{ $image_attributes }} alt="{{ $alt }}">
+      <img src="{{ $src }}" class="{{ $class_name }}" width="{{ $width }}" height="{{ $height }}" {{ $image_attributes }} alt="{{ $alt }}">
     {{- end -}}
   {{- end -}}
 {{- end -}}
