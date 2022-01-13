@@ -82,7 +82,7 @@
   {{ $viewbox_markup := index (findRE "<\\s*\\/?\\s*svg\\s*[^>]*view[bB]ox=\"([^\"]+)\"" . 1) 0 }}
 
   {{ with $width_markup }}
-    {{ $width = replaceRE ".*width=\"([^\"]+)\".*" "${1}" $width_markup }}
+    {{ $width = replaceRE ".*width=\"(\\d+)[^\"]*\".*" "${1}" $width_markup }}
   {{ else }}
     {{ with $viewbox_markup }}
       {{ $w1 := replaceRE ".*view[bB]ox=\"\\s*(\\d+)\\s+\\d+\\s+\\d+\\s+\\d+\\s*\".*" "${1}" . }}
@@ -92,7 +92,7 @@
   {{ end }}
 
   {{ with $height_markup }}
-    {{ $height = replaceRE ".*width=\"([^\"]+)\".*" "${1}" $width_markup }}
+    {{ $height = replaceRE ".*width=\"(\\d+)[^\"]*\".*" "${1}" $width_markup }}
   {{ else }}
     {{ with $viewbox_markup }}
       {{ $h1 := replaceRE ".*view[bB]ox=\"\\s*\\d+\\s+(\\d+)\\s+\\d+\\s+\\d+\\s*\".*" "${1}" . }}
