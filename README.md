@@ -349,6 +349,12 @@ Disallow: /
 Sitemap: {{ "sitemap.xml" | absURL -}}
 ```
 
+## Contributors
+<a href="https://github.com/jungvonmatt/wekit-core/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=jungvonmatt/wekit-core" />
+</a>
+
+
 ## Credits
 
 Many thanks to [regisphilibert](https://github.com/regisphilibert) for his outstanding support in the Hugo community and the inspiring work on the Hugo framework [Huge](https://github.com/theNewDynamic/huge).
