@@ -2,7 +2,20 @@
   utils/rich-text/rich-text
   Loops over each node and generates the corresponding HTML depending on the nodeType.
 */}}
-{{ $globals := .globals }}
+{{- $globals := .globals -}}
+{{- $context := .context -}}
+{{- $content := slice -}}
+
+{{- with $context -}} 
+  {{- if reflect.IsSlice . -}} 
+    {{ $content = . -}}
+  {{- end -}}
+  {{- if reflect.IsMap . -}} 
+    {{- with .content -}} 
+      {{ $content = . -}}
+    {{- end -}}    
+  {{- end -}}
+{{- end -}}
 
 {{- range .context -}}
   {{- $partial := print "utils/rich-text/blocks/" .node_type ".html" -}}
