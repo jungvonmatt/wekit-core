@@ -6,18 +6,18 @@
 {{- $context := .context -}}
 {{- $content := slice -}}
 
-{{- with $context -}} 
-  {{- if reflect.IsSlice . -}} 
+{{- with $context -}}
+  {{- if reflect.IsSlice . -}}
     {{ $content = . -}}
   {{- end -}}
-  {{- if reflect.IsMap . -}} 
-    {{- with .content -}} 
+  {{- if reflect.IsMap . -}}
+    {{- with .content -}}
       {{ $content = . -}}
-    {{- end -}}    
+    {{- end -}}
   {{- end -}}
 {{- end -}}
 
-{{- range .context -}}
+{{- range $content -}}
   {{- $partial := print "utils/rich-text/blocks/" .node_type ".html" -}}
   {{- if in (apply (seq 6) "printf" "heading-%v" ".") .node_type }}
     {{- $partial = print "utils/rich-text/blocks/heading.html" -}}
