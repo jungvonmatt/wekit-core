@@ -72,7 +72,7 @@
 {{ end }}
 
 {{ $symbol := "" }}
-{{ $svg := "" }}
+{{ $svg := "" }}`.*width=\"(\d+)[^\"]*\".*$`gmi
 
 {{ with $source }}
   {{ $tag_markup := index (findRE "<\\s*\\/?\\s*(svg|symbol)\\s*" . 1) 0 }}
@@ -81,27 +81,29 @@
   {{ $height_markup := index (findRE "<\\s*\\/?\\s*svg\\s*[^>]*height=\"([^\"]+)\"" . 1) 0 }}
   {{ $viewbox_markup := index (findRE "<\\s*\\/?\\s*svg\\s*[^>]*view[bB]ox=\"([^\"]+)\"" . 1) 0 }}
 
+  {{/* {{ $height_markup }}
+  {{ $viewbox_markup }} */}}
   {{ with $width_markup }}
-    {{ $width = replaceRE ".*width=\"(\\d+)[^\"]*\".*" "${1}" $width_markup }}
+    {{ $width = replaceRE "<\\s*\\/?\\s*svg\\s*[^>]*width=\"(\\d+)[^\"]*\".*$" "${1}" . }}
   {{ else }}
     {{ with $viewbox_markup }}
-      {{ $w1 := replaceRE ".*view[bB]ox=\"\\s*(\\d+)\\s+\\d+\\s+\\d+\\s+\\d+\\s*\".*" "${1}" . }}
-      {{ $w2 := replaceRE ".*view[bB]ox=\"\\s*\\d+\\s+\\d+\\s+(\\d+)\\s+\\d+\\s*\".*" "${1}" . }}
+      {{ $w1 := replaceRE "<\\s*\\/?\\s*svg\\s*[^>]*view[bB]ox=\"\\s*(\\d+)\\s+\\d+\\s+\\d+\\s+\\d+\\s*\".*" "${1}" . }}
+      {{ $w2 := replaceRE "<\\s*\\/?\\s*svg\\s*[^>]*view[bB]ox=\"\\s*\\d+\\s+\\d+\\s+(\\d+)\\s+\\d+\\s*\".*" "${1}" . }}
       {{ $width = sub (float $w2) (float $w1) }}
     {{ end }}
   {{ end }}
 
   {{ with $height_markup }}
-    {{ $height = replaceRE ".*width=\"(\\d+)[^\"]*\".*" "${1}" $width_markup }}
+    {{ $height = replaceRE "<\\s*\\/?\\s*svg\\s*[^>]*height=\"(\\d+)[^\"]*\".*" "${1}" . }}
   {{ else }}
     {{ with $viewbox_markup }}
-      {{ $h1 := replaceRE ".*view[bB]ox=\"\\s*\\d+\\s+(\\d+)\\s+\\d+\\s+\\d+\\s*\".*" "${1}" . }}
-      {{ $h2 := replaceRE ".*view[bB]ox=\"\\s*\\d+\\s+\\d+\\s+\\d+\\s+(\\d+)\\s*\".*" "${1}" . }}
+      {{ $h1 := replaceRE "<\\s*\\/?\\s*svg\\s*[^>]*view[bB]ox=\"\\s*\\d+\\s+(\\d+)\\s+\\d+\\s+\\d+\\s*\".*" "${1}" . }}
+      {{ $h2 := replaceRE "<\\s*\\/?\\s*svg\\s*[^>]*view[bB]ox=\"\\s*\\d+\\s+\\d+\\s+\\d+\\s+(\\d+)\\s*\".*" "${1}" . }}
       {{ $height = sub (float $h2) (float $h1) }}
     {{ end }}
   {{ end }}
 
-  {{ $viewbox := or (replaceRE ".*view[bB]ox=\"([^\"]+)\".*" "${1}" ($viewbox_markup))  (printf "0 0 %s %s" $width $height) }}
+  {{ $viewbox := or (replaceRE "<\\s*\\/?\\s*svg\\s*[^>]*view[bB]ox=\"([^\"]+)\".*" "${1}" ($viewbox_markup))  (printf "0 0 %s %s" $width $height) }}
 
   {{ $symbol = replaceRE (print "<" $tag ".*?>") (printf "<symbol id=\"%s\" viewBox=\"%s\">" $id $viewbox) . }}
   {{ $symbol = replaceRE (print "</" $tag ".*?>") "</symbol>" $symbol }}
