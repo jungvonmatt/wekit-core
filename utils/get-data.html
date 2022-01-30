@@ -4,12 +4,8 @@
 
   @example - Go Template
     {{ partial "utils/get-data" (dict
-      "globals" $globals
-      "context" (dict
-        "id" "ENTRY_ID"
-        "content_type"
-        "CONTENT_TYPE_ID"
-      )
+      "id" "ENTRY_ID"
+      "content_type" "CONTENT_TYPE_ID"
     ) }}
 */}}
 {{ $entry_id := .id }}
