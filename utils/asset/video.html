@@ -22,6 +22,7 @@
 {{- $loop := $params.loop | default true -}}
 {{- $autoplay := $params.autoplay | default true -}}
 {{- $controls := $params.controls | default false -}}
+{{- $poster := $params.poster | default false -}}
 {{- $muted := (or $autoplay $params.muted) -}}
 
 {{ $attributes := partialCached "utils/html/attribute" (dict
@@ -30,6 +31,7 @@
   "muted" $muted
   "controls" $controls
   "class" $class_name
+  "poster" $poster
 ) $params }}
 
 {{- if in $mime_type "video" -}}
