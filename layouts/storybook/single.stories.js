@@ -10,7 +10,8 @@
   {{- range $key, $value := .argtypes -}}
     {{- $param := dict -}}
     {{- with index $value "control" "type" -}}
-      {{- if eq (index $value "type" "name") "Boolean" -}}
+      {{- $typename := cond (partial "utils/reflect/is-string" .) . (index $value "type" "name") -}}
+      {{- if or (eq $typename "Boolean") (eq $typename "boolean") (eq $typename "bool")  -}}
         {{- $param = (dict "key" $key "options" (slice true false) "type" "bool") -}}
       {{- else -}}
         {{ with (index $value "options") }}
@@ -106,6 +107,10 @@
 
 {{- $templateParams := partial "template-params" (dict "argtypes" $argtypes)  }}
 {{- $combinations := partial "combinations" (dict "list" $templateParams) }}
+
+{{/* console.log({{ $argtypes | jsonify (dict "prefix" "  " "indent" "  ") }})
+console.log({{ $templateParams | jsonify (dict "prefix" "  " "indent" "  ") }})
+console.log({{ $combinations | jsonify (dict "prefix" "  " "indent" "  ") }}) */}}
 
 export default {
   title: '{{- $path -}}',
