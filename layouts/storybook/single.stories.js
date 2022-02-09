@@ -136,8 +136,8 @@ export default {
   {{- $key := . -}}
   {{- range $partials -}}
     {{- with partial "utils/get-data" . -}}
-      {{- with index . $key -}}
-        {{- $jsParams = merge $jsParams (dict $key .) -}}
+      {{- if ne (index . $key) nil -}}
+        {{- $jsParams = merge $jsParams (dict $key (index . $key)) -}}
       {{- else -}}
         {{- $templateParam := dict -}}
         {{- range $templateParams -}}
