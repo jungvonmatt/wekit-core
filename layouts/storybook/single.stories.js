@@ -108,6 +108,8 @@
 {{- $templateParams := partial "template-params" (dict "argtypes" $argtypes)  }}
 {{- $combinations := partial "combinations" (dict "list" $templateParams) }}
 
+import '@public/js/main.js';
+
 {{/* console.log({{ $argtypes | jsonify (dict "prefix" "  " "indent" "  ") }})
 console.log({{ $templateParams | jsonify (dict "prefix" "  " "indent" "  ") }})
 console.log({{ $combinations | jsonify (dict "prefix" "  " "indent" "  ") }}) */}}
