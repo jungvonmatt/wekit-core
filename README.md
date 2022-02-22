@@ -1,5 +1,11 @@
 # WEKit core
 
+**⚠️ This repo is deprecated and will be deleted soon!** 
+
+The utils have moved to [@jungvonmatt/wekit](https://github.com/jungvonmatt/wekit/tree/main/hugo-modules/core).
+
+<hr />
+
 [Hugo](https://gohugo.io/) templates and utilities that support [Contentful](https://www.contentful.com/) and/or [Storybook](https://storybook.js.org/) projects.
 
 - [wekit-core](#wekit-core)
